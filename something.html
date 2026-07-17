@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Mahika! 🌻</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+  :root {
+    --butter-yellow: #F5E6A3;
+    --warm-yellow: #F5D76E;
+    --sunflower-orange: #F4A460;
+    --sunflower-center: #8B4513;
+    --petal-yellow: #FFD700;
+    --soft-cream: #FFFDF0;
+    --deep-brown: #5D4037;
+    --blush-pink: #FFD1D1;
+    --lavender: #E8D5F5;
+    --soft-green: #A8D5A2;
+    --text-dark: #3E2723;
+    --text-medium: #5D4037;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #FFFDF0 0%, #F5E6A3 30%, #FFFDF0 50%, #F5E6A3 70%, #FFFDF0 100%);
+    background-size: 400% 400%;
+    animation: bgShift 15s ease infinite;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text-dark);
+  }
+
+  @keyframes bgShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Floating Sunflowers Background */
+  .floating-sunflowers {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .sunflower-float {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.3;
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(110vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% {
+      transform: translateY(-10vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Petal rain */
+  .petal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .petal {
+    position: absolute;
+    top: -20px;
+    width: 12px;
+    height: 12px;
+    background: var(--petal-yellow);
+    border-radius: 50% 0 50% 0;
+    opacity: 0.6;
+    animation: petalFall linear infinite;
+  }
+
+  @keyframes petalFall {
+    0% {
+      transform: translateY(-20px) rotate(0deg) translateX(0px);
+      opacity: 0;
+    }
+    10% { opacity: 0.6; }
+    100% {
+      transform: translateY(105vh) rotate(720deg) translateX(100px);
+      opacity: 0;
+    }
+  }
+
+  /* Sparkle cursor trail */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--warm-yellow);
+    animation: sparkleFade 0.8s ease-out forwards;
+    z-index: 9999;
+  }
+
+  @keyframes sparkleFade {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0) translateY(-30px); opacity: 0; }
+  }
+
+  /* ===== ENVELOPE SCENE ===== */
+  .envelope-scene {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .envelope-wrapper {
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .envelope-prompt {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    color: var(--text-medium);
+    margin-bottom: 30px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  .envelope {
+    width: clamp(250px, 60vw, 380px);
+    height: clamp(170px, 40vw, 260px);
+    position: relative;
+    cursor: pointer;
+    margin: 0 auto;
+    perspective: 800px;
+  }
+
+  .envelope-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, var(--butter-yellow), var(--warm-yellow));
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(93, 64, 55, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .envelope:hover .envelope-body {
+    transform: scale(1.03);
+  }
+
+  .envelope-body::before {
+    content: '🌻';
+    position: absolute;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    bottom: 15px;
+    right: 20px;
+    animation: gentleBob 3s ease-in-out infinite;
+  }
+
+  @keyframes gentleBob {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+  }
+
+  .envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55%;
+    background: linear-gradient(145deg, var(--warm-yellow), var(--butter-yellow));
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    transform-origin: top center;
+    transition: transform 0.6s ease;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .envelope-flap::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, transparent 40%, rgba(255,255,255,0.3));
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+  }
+
+  .envelope-seal {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%);
+    width: clamp(45px, 10vw, 60px);
+    height: clamp(45px, 10vw, 60px);
+    background: radial-gradient(circle, var(--sunflower-orange), var(--sunflower-center));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    z-index: 3;
+    box-shadow: 0 3px 15px rgba(139, 69, 19, 0.3);
+    animation: sealPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes sealPulse {
+    0%, 100% { box-shadow: 0 3px 15px rgba(139, 69, 19, 0.3); }
+    50% { box-shadow: 0 3px 25px rgba(139, 69, 19, 0.6); }
+  }
+
+  .envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+  }
+
+  .envelope.opened .envelope-seal {
+    animation: sealPop 0.5s ease forwards;
+  }
+
+  @keyframes sealPop {
+    0% { transform: translateX(-50%) translateY(50%) scale(1); }
+    50% { transform: translateX(-50%) translateY(50%) scale(1.3); }
+    100% { transform: translateX(-50%) translateY(50%) scale(0); opacity: 0; }
+  }
+
+  .click-hint {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    margin-top: 15px;
+    opacity: 0.7;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ===== CARD SCENE ===== */
+  .card-scene {
+    display: none;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-scene.active {
+    display: block;
+  }
+
+  .card-container {
+    max-width: 800px;
+    margin: 0 auto;
+    animation: cardAppear 0.8s ease-out;
+  }
+
+  @keyframes cardAppear {
+    from { opacity: 0; transform: scale(0.9) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Hero Section */
+  .hero-section {
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+  }
+
+  .sunflower-crown {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    display: block;
+    margin-bottom: 10px;
+    animation: crownBounce 2s ease-in-out infinite;
+  }
+
+  @keyframes crownBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .birthday-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    background: linear-gradient(135deg, var(--sunflower-center), var(--sunflower-orange), var(--petal-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    animation: titleGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes titleGlow {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+  }
+
+  .name-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 7vw, 4.5rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    position: relative;
+    display: inline-block;
+    margin: 10px 0 5px;
+  }
+
+  .name-title::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--sunflower-orange), var(--petal-yellow), var(--sunflower-orange), transparent);
+    animation: underlineGrow 2s ease-out 0.5s both;
+  }
+
+  @keyframes underlineGrow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .age-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--petal-yellow), var(--warm-yellow));
+    color: var(--sunflower-center);
+    font-weight: 600;
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    padding: 8px 24px;
+    border-radius: 50px;
+    margin-top: 15px;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    animation: badgePop 0.6s ease-out 1s both;
+  }
+
+  @keyframes badgePop {
+    from { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .date-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--text-medium);
+    margin-top: 12px;
+    opacity: 0.8;
+  }
+
+  /* Divider */
+  .sunflower-divider {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 1.5rem;
+    letter-spacing: 10px;
+    opacity: 0.5;
+  }
+
+  /* Message Cards */
+  .messages-grid {
+    display: grid;
+    gap: 20px;
+    padding: 10px 0 30px;
+  }
+
+  .message-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: clamp(20px, 5vw, 35px);
+    box-shadow: 0 8px 32px rgba(93, 64, 55, 0.1);
+    border: 1px solid rgba(245, 230, 163, 0.5);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+
+  .message-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .message-card:hover {
+    box-shadow: 0 12px 48px rgba(93, 64, 55, 0.18);
+    transform: translateY(-3px) !important;
+  }
+
+  .message-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .message-card:nth-child(1)::before { background: linear-gradient(to bottom, var(--petal-yellow), var(--sunflower-orange)); }
+  .message-card:nth-child(2)::before { background: linear-gradient(to bottom, var(--blush-pink), #FF9999); }
+  .message-card:nth-child(3)::before { background: linear-gradient(to bottom, var(--soft-green), #7BC47F); }
+  .message-card:nth-child(4)::before { background: linear-gradient(to bottom, var(--lavender), #C9A8E8); }
+  .message-card:nth-child(5)::before { background: linear-gradient(to bottom, var(--warm-yellow), var(--petal-yellow)); }
+
+  .card-icon {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 12px;
+    display: inline-block;
+    animation: iconFloat 3s ease-in-out infinite;
+  }
+
+  .message-card:nth-child(2) .card-icon { animation-delay: 0.5s; }
+  .message-card:nth-child(3) .card-icon { animation-delay: 1s; }
+  .message-card:nth-child(4) .card-icon { animation-delay: 1.5s; }
+  .message-card:nth-child(5) .card-icon { animation-delay: 2s; }
+
+  @keyframes iconFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+  }
+
+  .card-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    line-height: 1.75;
+    color: var(--text-medium);
+  }
+
+  .card-text .highlight {
+    color: var(--sunflower-center);
+    font-weight: 600;
+  }
+
+  .card-text .gentle {
+    color: var(--sunflower-orange);
+    font-style: italic;
+  }
+
+  /* Interactive Wish Wall */
+  .wish-wall-section {
+    text-align: center;
+    padding: 30px 0;
+  }
+
+  .section-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    color: var(--text-dark);
+    margin-bottom: 20px;
+  }
+
+  .wish-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+
+  .wish-btn {
+    background: linear-gradient(135deg, var(--butter-yellow), var(--warm-yellow));
+    border: 2px solid var(--sunflower-orange);
+    color: var(--text-dark);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wish-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(244, 164, 96, 0.4);
+    background: linear-gradient(135deg, var(--warm-yellow), var(--petal-yellow));
+  }
+
+  .wish-btn:active {
+    transform: scale(0.95);
+  }
+
+  .wish-btn.clicked {
+    background: linear-gradient(135deg, var(--sunflower-orange), var(--sunflower-center));
+    color: white;
+    border-color: var(--sunflower-center);
+  }
+
+  .wish-display {
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .wish-message {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: var(--text-dark);
+    max-width: 600px;
+    line-height: 1.8;
+    animation: wishAppear 0.5s ease-out;
+  }
+
+  @keyframes wishAppear {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .wish-message .emoji-big {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  /* Photo Placeholder */
+  .photo-section {
+    text-align: center;
+    padding: 30px 0;
+  }
+
+  .photo-frame {
+    width: clamp(200px, 50vw, 300px);
+    height: clamp(200px, 50vw, 300px);
+    margin: 0 auto;
+    border-radius: 20px;
+    background: linear-gradient(135deg, var(--butter-yellow), var(--warm-yellow));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 4px dashed var(--sunflower-orange);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .photo-frame:hover {
+    border-style: solid;
+    transform: scale(1.02);
+  }
+
+  .photo-frame .placeholder-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    color: var(--text-medium);
+    margin-top: 10px;
+  }
+
+  .photo-frame .placeholder-icon {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+  }
+
+  .photo-corner {
+    position: absolute;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .photo-corner:nth-child(1) { top: 8px; left: 8px; }
+  .photo-corner:nth-child(2) { top: 8px; right: 8px; }
+  .photo-corner:nth-child(3) { bottom: 8px; left: 8px; }
+  .photo-corner:nth-child(4) { bottom: 8px; right: 8px; }
+
+  /* Countdown / Days Together */
+  .days-counter {
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .counter-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 20px 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(93, 64, 55, 0.1);
+    border: 1px solid rgba(245, 230, 163, 0.5);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .counter-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    color: var(--sunflower-orange);
+    line-height: 1;
+    animation: countPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes countPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); color: var(--petal-yellow); }
+  }
+
+  .counter-label {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    color: var(--text-medium);
+    text-align: left;
+    line-height: 1.4;
+  }
+
+  .counter-label strong {
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+
+  /* Confetti Canvas */
+  #confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  /* Music Toggle */
+  .music-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--petal-yellow), var(--warm-yellow));
+    border: 2px solid var(--sunflower-orange);
+    font-size: 1.4rem;
+    cursor: pointer;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(244, 164, 96, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .music-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(244, 164, 96, 0.6);
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    text-align: center;
+    padding: 20px 0;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  .scroll-indicator span {
+    font-size: 1.5rem;
+  }
+
+  /* Footer */
+  .card-footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    position: relative;
+  }
+
+  .footer-sunflowers {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    letter-spacing: 15px;
+    margin-bottom: 15px;
+  }
+
+  .footer-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--text-medium);
+    line-height: 1.8;
+  }
+
+  .footer-signature {
+    margin-top: 20px;
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+    color: var(--sunflower-center);
+    font-weight: 700;
+  }
+
+  .footer-hearts {
+    margin-top: 10px;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.1); }
+    80% { transform: scale(1); }
+  }
+
+  /* Touch ripple effect */
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.3);
+    transform: scale(0);
+    animation: rippleAnim 0.6s ease-out;
+    pointer-events: none;
+  }
+
+  @keyframes rippleAnim {
+    to { transform: scale(4); opacity: 0; }
+  }
+
+  /* CTA Button */
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--sunflower-orange), var(--petal-yellow));
+    color: var(--sunflower-center);
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    font-weight: 600;
+    padding: 14px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 25px rgba(244, 164, 96, 0.4);
+    text-decoration: none;
+    margin-top: 10px;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 35px rgba(244, 164, 96, 0.5);
+  }
+
+  .cta-button:active {
+    transform: translateY(-1px) scale(0.98);
+  }
+
+  /* Tooltip */
+  .tooltip {
+    position: fixed;
+    background: var(--text-dark);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Toast notification */
+  .toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text-dark);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    z-index: 200;
+    opacity: 0;
+    transition: all 0.4s ease;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 600px) {
+    .hero-section { padding: 25px 10px; }
+    .message-card { padding: 18px; }
+    .counter-card { padding: 15px 20px; gap: 10px; }
+    .wish-buttons { gap: 8px; }
+    .wish-btn { padding: 8px 16px; }
+    .envelope { margin: 0 auto; }
+  }
+
+  /* Print styles */
+  @media print {
+    .floating-sunflowers, .petal-container, .music-toggle, .scroll-indicator, #confetti-canvas { display: none !important; }
+    body { background: white !important; }
+    .message-card { break-inside: avoid; opacity: 1 !important; transform: none !important; }
+  }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating Sunflowers -->
+<div class="floating-sunflowers" id="floatingSunflowers"></div>
+
+<!-- Petal Rain -->
+<div class="petal-container" id="petalContainer"></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== ENVELOPE SCENE ===== -->
+<div class="envelope-scene" id="envelopeScene">
+  <div class="envelope-wrapper">
+    <p class="envelope-prompt">You have a special letter waiting for you, Mahika ✉️</p>
+    <div class="envelope" id="envelope">
+      <div class="envelope-body">
+        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+          <div style="font-size:clamp(2rem,5vw,3rem);">🌻</div>
+        </div>
+      </div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">💛</div>
+    </div>
+    <p class="click-hint">tap to open 💌</p>
+  </div>
+</div>
+
+<!-- ===== MAIN CARD SCENE ===== -->
+<div class="card-scene" id="cardScene">
+
+  <div class="card-container">
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <span class="sunflower-crown">🌻🌻🌻</span>
+      <h1 class="birthday-title">Happy Birthday</h1>
+      <h2 class="name-title">Mahika!</h2>
+      <div class="age-badge">
+        <span>🎂</span>
+        <span>Turning 19 Today!</span>
+        <span>🎉</span>
+      </div>
+      <p class="date-text">17th July — A day the world got brighter ☀️</p>
+    </section>
+
+    <div class="sunflower-divider">🌻 🌻 🌻 🌻 🌻</div>
+
+    <!-- Days Together Counter -->
+    <section class="days-counter">
+      <div class="counter-card">
+        <div class="counter-number">8</div>
+        <div class="counter-label">
+          <strong>days of knowing you</strong><br>
+          and already my best friend 💛
+        </div>
+      </div>
+    </section>
+
+    <div class="sunflower-divider">🌻 🌻 🌻 🌻 🌻</div>
+
+    <!-- Messages -->
+    <section class="messages-grid">
+
+      <div class="message-card" data-delay="0">
+        <div class="card-icon">🌻</div>
+        <h3 class="card-heading">To My Sunflower Girl</h3>
+        <p class="card-text">
+          They say some people come into your life like sunflowers — bringing warmth, light, and an instant feeling of home. That's exactly what you did, <span class="highlight">Mahika</span>. Eight days ago we started talking, and somehow it already feels like we've known each other forever. You have this beautiful energy that just makes everything brighter — like sunflowers turning to face the sun. 🌻
+        </p>
+      </div>
+
+      <div class="message-card" data-delay="100">
+        <div class="card-icon">🎂</div>
+        <h3 class="card-heading">Welcome to 19!</h3>
+        <p class="card-text">
+          Today you step into <span class="highlight">nineteen</span> — and what a journey this is going to be! This is your year, Mahika. A year of new beginnings, new adventures, and discovering even more of how incredible you already are. May this year bring you everything your heart desires and more. You deserve the entire world and then some. 🎁✨
+        </p>
+      </div>
+
+      <div class="message-card" data-delay="200">
+        <div class="card-icon">💪</div>
+        <h3 class="card-heading">You Are So Much Stronger Than You Know</h3>
+        <p class="card-text">
+          I know things haven't been easy lately. Breakups can feel like the ground is shaking beneath your feet. But here's the truth — <span class="gentle">you are not defined by who stays or who leaves</span>. You are defined by the kindness you carry, the light you radiate, and the strength it takes to keep going. And baby, you are glowing through it all. This chapter is closing, but the next one? It's going to be <span class="highlight">spectacular</span>. 🌟
+        </p>
+      </div>
+
+      <div class="message-card" data-delay="300">
+        <div class="card-icon">🤝</div>
+        <h3 class="card-heading">Best Friends from College</h3>
+        <p class="card-text">
+          We haven't even met in person yet, and I already know — <span class="highlight">you're my person</span>. The one I'm going to have the best memories with. Late night calls, college corridors, spontaneous plans, and a friendship that's only going to grow stronger. I'm so grateful that life decided to put us in the same story. This is just the beginning, and I can't wait for every single chapter ahead. 💕
+        </p>
+      </div>
+
+      <div class="message-card" data-delay="400">
+        <div class="card-icon">🦋</div>
+        <h3 class="card-heading">A Little Reminder on Your Birthday</h3>
+        <p class="card-text">
+          You are <span class="highlight">worthy of love</span> — the kind that stays, the kind that chooses you every day, the kind that feels like coming home. Don't let one heartbreak make you doubt what an extraordinary person you are. The right people, the right love, and the right everything is making its way to you. Until then, know that I'm here — today, tomorrow, and always. <span class="gentle">Happy 19th, beautiful soul.</span> 🌻💛
+        </p>
+      </div>
+
+    </section>
+
+    <div class="sunflower-divider">🌻 🌻 🌻 🌻 🌻</div>
+
+    <!-- Interactive Wish Wall -->
+    <section class="wish-wall-section">
+      <h2 class="section-title">Pick a Wish, Mahika! 🎁</h2>
+      <div class="wish-buttons">
+        <button class="wish-btn" data-wish="0" onclick="showWish(0, this)">🌸 Self-Love</button>
+        <button class="wish-btn" data-wish="1" onclick="showWish(1, this)">🌟 Strength</button>
+        <button class="wish-btn" data-wish="2" onclick="showWish(2, this)">🌻 Happiness</button>
+        <button class="wish-btn" data-wish="3" onclick="showWish(3, this)">💫 Future</button>
+        <button class="wish-btn" data-wish="4" onclick="showWish(4, this)">🦋 New Beginnings</button>
+        <button class="wish-btn" data-wish="5" onclick="showWish(5, this)">💛 Friendship</button>
+      </div>
+      <div class="wish-display" id="wishDisplay">
+        <p class="wish-message" style="opacity:0.4;font-family:'Poppins',sans-serif;font-style:normal;">
+          Tap a button above to receive your special birthday wish ✨
+        </p>
+      </div>
+    </section>
+
+    <div class="sunflower-divider">🌻 🌻 🌻 🌻 🌻</div>
+
+    <!-- Photo Together Section -->
+    <section class="photo-section">
+      <h2 class="section-title">Our First "Photo" Together 📸</h2>
+      <div class="photo-frame" id="photoFrame" onclick="handlePhotoClick()">
+        <span class="photo-corner">🌻</span>
+        <span class="photo-corner">🌻</span>
+        <span class="photo-corner">🌻</span>
+        <span class="photo-corner">🌻</span>
+        <div class="placeholder-icon" id="photoIcon">📷</div>
+        <p class="placeholder-text" id="photoText">Tap for a surprise!</p>
+      </div>
+    </section>
+
+    <div class="sunflower-divider">🌻 🌻 🌻 🌻 🌻</div>
+
+    <!-- Footer -->
+    <footer class="card-footer">
+      <div class="footer-sunflowers">🌻 🌻 🌻 🌻 🌻</div>
+      <p class="footer-text">
+        Here's to late-night conversations, college adventures,<br>
+        and a friendship that feels like sunshine. ☀️
+      </p>
+      <p class="footer-signature">
+        With all my love and warm hugs,<br>
+        Your Best Friend 💛
+      </p>
+      <p class="footer-hearts">🌻🌻🌻</p>
+      <div style="margin-top: 25px;">
+        <button class="cta-button" onclick="launchConfetti()">🎉 Celebrate Mahika!</button>
+      </div>
+    </footer>
+
+    <div class="scroll-indicator">
+      <span>👆</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- Music Toggle -->
+<button class="music-toggle" id="musicToggle" onclick="toggleMusic()" title="Toggle Birthday Music">
+  🎵
+</button>
+
+<script>
+  // ===== WISH MESSAGES =====
+  const wishes = [
+    {
+      emoji: '🌸',
+      text: 'May you always remember how beautiful you are — not just on the outside, but in every little thing that makes you, YOU. Fall in love with yourself first, Mahika, because you are absolutely worth it.'
+    },
+    {
+      emoji: '🌟',
+      text: 'You are stronger than every storm that has ever come your way. And this one? It\'s just making you shine even brighter. Watch yourself bloom, Mahika — the world isn\'t ready for how powerful you\'re becoming.'
+    },
+    {
+      emoji: '🌻',
+      text: 'May your days be as bright and warm as sunflowers in July. May laughter follow you everywhere, and may you always find reasons to smile — even on the days when it feels hard.'
+    },
+    {
+      emoji: '💫',
+      text: 'Your future is written in golden ink, Mahika. Everything you\'re going through right now is shaping the most beautiful story. Trust the process — your happy ending is closer than you think.'
+    },
+    {
+      emoji: '🦋',
+      text: 'Every ending is a new beginning in disguise. Like a butterfly leaving its cocoon, you\'re about to spread your wings and fly higher than ever before. This is YOUR metamorphosis. 🦋'
+    },
+    {
+      emoji: '💛',
+      text: 'And as for me — I\'m not going anywhere. 8 days in and you already mean the world to me. Here\'s to a lifetime of friendship, Mahika. Through every high and every low, I\'ve got you. Always.'
+    }
+  ];
+
+  let currentWish = -1;
+
+  function showWish(index, btn) {
+    if (currentWish === index) return;
+    currentWish = index;
+
+    document.querySelectorAll('.wish-btn').forEach(b => b.classList.remove('clicked'));
+    btn.classList.add('clicked');
+
+    const display = document.getElementById('wishDisplay');
+    const wish = wishes[index];
+
+    display.innerHTML = `
+      <div class="wish-message">
+        <span class="emoji-big">${wish.emoji}</span>
+        "${wish.text}"
+      </div>
+    `;
+
+    createRipple(btn);
+  }
+
+  // ===== RIPPLE EFFECT =====
+  function createRipple(element) {
+    const ripple = document.createElement('div');
+    ripple.className = 'ripple';
+    const rect = element.getBoundingClientRect();
+    ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + 'px';
+    ripple.style.left = (rect.width / 2 - ripple.offsetWidth / 2) + 'px';
+    ripple.style.top = (rect.height / 2 - ripple.offsetHeight / 2) + 'px';
+    element.style.position = 'relative';
+    element.style.overflow = 'hidden';
+    element.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+
+  // ===== ENVELOPE OPENING =====
+  const envelope = document.getElementById('envelope');
+  const envelopeScene = document.getElementById('envelopeScene');
+  const cardScene = document.getElementById('cardScene');
+  let envelopeOpened = false;
+
+  envelope.addEventListener('click', function() {
+    if (envelopeOpened) return;
+    envelopeOpened = true;
+
+    this.classList.add('opened');
+
+    setTimeout(() => {
+      envelopeScene.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+      envelopeScene.style.opacity = '0';
+      envelopeScene.style.transform = 'scale(0.95)';
+
+      setTimeout(() => {
+        envelopeScene.style.display = 'none';
+        cardScene.classList.add('active');
+        startConfetti();
+        showToast('🎉 Happy Birthday, Mahika! 🌻');
+        observeMessages();
+      }, 500);
+    }, 800);
+  });
+
+  // ===== SCROLL REVEAL FOR MESSAGES =====
+  function observeMessages() {
+    const cards = document.querySelectorAll('.message-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(card => observer.observe(card));
+  }
+
+  // ===== FLOATING SUNFLOWERS =====
+  function createFloatingSunflowers() {
+    const container = document.getElementById('floatingSunflowers');
+    const emojis = ['🌻', '🌼', '💛', '☀️', '🌸'];
+
+    function addSunflower() {
+      const el = document.createElement('div');
+      el.className = 'sunflower-float';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+      el.style.animationDuration = (Math.random() * 10 + 15) + 's';
+      el.style.animationDelay = Math.random() * 5 + 's';
+      container.appendChild(el);
+      el.addEventListener('animationend', () => el.remove());
+    }
+
+    for (let i = 0; i < 6; i++) {
+      setTimeout(addSunflower, i * 2000);
+    }
+    setInterval(addSunflower, 4000);
+  }
+
+  // ===== PETAL RAIN =====
+  function createPetalRain() {
+    const container = document.getElementById('petalContainer');
+    const colors = ['#FFD700', '#F5E6A3', '#F4A460', '#FFD1D1', '#E8D5F5'];
+
+    function addPetal() {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + '%';
+      petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+      petal.style.width = (Math.random() * 8 + 8) + 'px';
+      petal.style.height = petal.style.width;
+      petal.style.animationDuration = (Math.random() * 5 + 8) + 's';
+      petal.style.animationDelay = Math.random() * 3 + 's';
+      petal.style.opacity = Math.random() * 0.4 + 0.2;
+      container.appendChild(petal);
+      setTimeout(() => petal.remove(), 15000);
+    }
+
+    setInterval(addPetal, 600);
+  }
+
+  // ===== CONFETTI =====
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  let confettiParticles = [];
+  let confettiRunning = false;
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  class ConfettiParticle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height - canvas.height;
+      this.size = Math.random() * 8 + 4;
+      this.speedY = Math.random() * 3 + 2;
+      this.speedX = Math.random() * 2 - 1;
+      this.rotation = Math.random() * 360;
+      this.rotationSpeed = Math.random() * 10 - 5;
+      this.color = ['#FFD700', '#F4A460', '#F5E6A3', '#FFD1D1', '#E8D5F5', '#A8D5A2'][Math.floor(Math.random() * 6)];
+      this.shape = Math.floor(Math.random() * 3);
+      this.opacity = 1;
+    }
+
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      this.rotation += this.rotationSpeed;
+      this.speedX += Math.sin(this.y * 0.01) * 0.1;
+      if (this.y > canvas.height + 20) {
+        this.y = -20;
+        this.x = Math.random() * canvas.width;
+      }
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate((this.rotation * Math.PI) / 180);
+      ctx.globalAlpha = this.opacity;
+      ctx.fillStyle = this.color;
+
+      if (this.shape === 0) {
+        ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size / 2);
+      } else if (this.shape === 1) {
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(0, -this.size / 2);
+        ctx.lineTo(this.size / 2, this.size / 2);
+        ctx.lineTo(-this.size / 2, this.size / 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  function startConfetti() {
+    confettiParticles = [];
+    for (let i = 0; i < 80; i++) {
+      confettiParticles.push(new ConfettiParticle());
+    }
+    if (!confettiRunning) {
+      confettiRunning = true;
+      animateConfetti();
+    }
+    setTimeout(() => {
+      confettiParticles = [];
+      setTimeout(() => { confettiRunning = false; }, 2000);
+    }, 4000);
+  }
+
+  function launchConfetti() {
+    confettiParticles = [];
+    for (let i = 0; i < 120; i++) {
+      const p = new ConfettiParticle();
+      p.y = -Math.random() * 100;
+      confettiParticles.push(p);
+    }
+    if (!confettiRunning) {
+      confettiRunning = true;
+      animateConfetti();
+    }
+    setTimeout(() => {
+      confettiParticles = [];
+      setTimeout(() => { confettiRunning = false; }, 2000);
+    }, 5000);
+    showToast('🎉 Happy Birthday Mahika! 19 looks beautiful on you! 🌻');
+  }
+
+  function animateConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confettiParticles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    if (confettiParticles.length > 0 || confettiRunning) {
+      requestAnimationFrame(animateConfetti);
+    }
+  }
+
+  // ===== SPARKLE CURSOR =====
+  let sparkleThrottle = 0;
+  document.addEventListener('mousemove', (e) => {
+    if (Date.now() - sparkleThrottle < 50) return;
+    sparkleThrottle = Date.now();
+
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = e.clientX + 'px';
+    sparkle.style.top = e.clientY + 'px';
+    sparkle.style.background = ['#FFD700', '#F4A460', '#FFD1D1', '#E8D5F5'][Math.floor(Math.random() * 4)];
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 800);
+  });
+
+  // Touch sparkle
+  document.addEventListener('touchmove', (e) => {
+    if (Date.now() - sparkleThrottle < 80) return;
+    sparkleThrottle = Date.now();
+    const touch = e.touches[0];
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = touch.clientX + 'px';
+    sparkle.style.top = touch.clientY + 'px';
+    sparkle.style.background = ['#FFD700', '#F4A460', '#FFD1D1'][Math.floor(Math.random() * 3)];
+    document.body.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 800);
+  });
+
+  // ===== PHOTO FRAME =====
+  let photoStage = 0;
+  const photoMessages = [
+    { icon: '📸', text: 'Our college selfie loading...' },
+    { icon: '🌻', text: 'Waiting to meet you in person!' },
+    { icon: '👯', text: 'Best friends, almost there!' },
+    { icon: '💛', text: 'Mahika & Bestie — forever!' },
+  ];
+
+  function handlePhotoClick() {
+    const icon = document.getElementById('photoIcon');
+    const text = document.getElementById('photoText');
+    const msg = photoMessages[photoStage];
+
+    icon.style.transition = 'transform 0.3s ease';
+    icon.style.transform = 'scale(0)';
+
+    setTimeout(() => {
+      icon.textContent = msg.icon;
+      icon.style.transform = 'scale(1)';
+      text.textContent = msg.text;
+    }, 300);
+
+    photoStage = (photoStage + 1) % photoMessages.length;
+  }
+
+  // ===== TOAST =====
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  // ===== MUSIC TOGGLE =====
+  let musicPlaying = false;
+  let audioContext = null;
+
+  function toggleMusic() {
+    const btn = document.getElementById('musicToggle');
+
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    if (musicPlaying) {
+      audioContext.suspend();
+      btn.textContent = '🔇';
+      musicPlaying = false;
+      showToast('🔇 Music paused');
+    } else {
+      audioContext.resume();
+      btn.textContent = '🎵';
+      musicPlaying = true;
+      playBirthdayMelody();
+      showToast('🎵 Playing birthday vibes!');
+    }
+  }
+
+  function playBirthdayMelody() {
+    if (!audioContext || !musicPlaying) return;
+
+    const notes = [
+      { freq: 262, dur: 0.3 }, { freq: 294, dur: 0.3 }, { freq: 330, dur: 0.3 },
+      { freq: 262, dur: 0.3 }, { freq: 330, dur: 0.3 }, { freq: 349, dur: 0.3 },
+      { freq: 392, dur: 0.6 }, { freq: 330, dur: 0.3 }, { freq: 349, dur: 0.3 },
+      { freq: 392, dur: 0.3 }, { freq: 440, dur: 0.6 },
+    ];
+
+    let time = audioContext.currentTime;
+    notes.forEach(note => {
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = note.freq;
+      gain.gain.setValueAtTime(0.15, time);
+      gain.gain.exponentialRampToValueAtTime(0.01, time + note.dur);
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+      osc.start(time);
+      osc.stop(time + note.dur);
+      time += note.dur;
+    });
+
+    setTimeout(() => {
+      if (musicPlaying) playBirthdayMelody();
+    }, 5000);
+  }
+
+  // ===== INIT =====
+  createFloatingSunflowers();
+  createPetalRain();
+
+  // Auto-open envelope on mobile after delay
+  if ('ontouchstart' in window) {
+    document.querySelector('.envelope-prompt').textContent = 'Tap the envelope to open! 💌';
+  }
+</script>
+
+</body>
+</html>
