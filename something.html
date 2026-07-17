@@ -672,29 +672,137 @@
     z-index: 100;
   }
 
-  /* Music Toggle */
-  .music-toggle {
+  /* Music Panel */
+  .music-panel {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 50px;
-    height: 50px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .music-songs {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: rgba(255, 253, 240, 0.95);
+    backdrop-filter: blur(15px);
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(93, 64, 55, 0.2);
+    border: 1px solid rgba(245, 230, 163, 0.6);
+    min-width: 200px;
+    animation: panelSlideUp 0.3s ease-out;
+  }
+
+  .music-songs.open {
+    display: flex;
+  }
+
+  @keyframes panelSlideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .music-song-btn {
+    background: transparent;
+    border: 1.5px solid rgba(245, 230, 163, 0.6);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    text-align: left;
+  }
+
+  .music-song-btn:hover {
+    background: linear-gradient(135deg, var(--butter-yellow), var(--warm-yellow));
+    border-color: var(--sunflower-orange);
+    transform: translateX(3px);
+  }
+
+  .music-song-btn.active {
+    background: linear-gradient(135deg, var(--sunflower-orange), var(--petal-yellow));
+    border-color: var(--sunflower-center);
+    color: white;
+    font-weight: 600;
+  }
+
+  .music-song-btn .song-icon {
+    font-size: 1.1rem;
+    width: 24px;
+    text-align: center;
+  }
+
+  .music-toggle-btn {
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--petal-yellow), var(--warm-yellow));
     border: 2px solid var(--sunflower-orange);
     font-size: 1.4rem;
     cursor: pointer;
-    z-index: 50;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 15px rgba(244, 164, 96, 0.4);
     transition: all 0.3s ease;
+    position: relative;
   }
 
-  .music-toggle:hover {
+  .music-toggle-btn:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 25px rgba(244, 164, 96, 0.6);
+  }
+
+  .music-toggle-btn.playing {
+    animation: musicPulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes musicPulse {
+    0%, 100% { box-shadow: 0 4px 15px rgba(244, 164, 96, 0.4); }
+    50% { box-shadow: 0 4px 25px rgba(255, 215, 0, 0.7); }
+  }
+
+  .music-visualizer {
+    position: absolute;
+    bottom: -8px;
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .music-toggle-btn.playing .music-visualizer {
+    opacity: 1;
+  }
+
+  .viz-bar {
+    width: 3px;
+    background: var(--sunflower-orange);
+    border-radius: 2px;
+    animation: vizBounce 0.6s ease-in-out infinite alternate;
+  }
+
+  .viz-bar:nth-child(1) { height: 4px; animation-delay: 0s; }
+  .viz-bar:nth-child(2) { height: 8px; animation-delay: 0.15s; }
+  .viz-bar:nth-child(3) { height: 5px; animation-delay: 0.3s; }
+  .viz-bar:nth-child(4) { height: 10px; animation-delay: 0.1s; }
+  .viz-bar:nth-child(5) { height: 6px; animation-delay: 0.25s; }
+
+  @keyframes vizBounce {
+    from { height: 3px; }
+    to { height: 12px; }
   }
 
   /* Scroll indicator */
@@ -840,11 +948,14 @@
     .wish-buttons { gap: 8px; }
     .wish-btn { padding: 8px 16px; }
     .envelope { margin: 0 auto; }
+    .music-panel { bottom: 15px; right: 15px; }
+    .music-songs { min-width: 170px; }
+    .music-song-btn { font-size: 0.75rem; padding: 6px 10px; }
   }
 
   /* Print styles */
   @media print {
-    .floating-sunflowers, .petal-container, .music-toggle, .scroll-indicator, #confetti-canvas { display: none !important; }
+    .floating-sunflowers, .petal-container, .music-panel, .scroll-indicator, #confetti-canvas { display: none !important; }
     body { background: white !important; }
     .message-card { break-inside: avoid; opacity: 1 !important; transform: none !important; }
   }
@@ -900,7 +1011,7 @@
       <span class="sunflower-crown">🌻🌻🌻</span>
       <h1 class="birthday-title">Happy Birthday</h1>
       <h2 class="name-title">Mahika!</h2>
-    </br>
+      </br>
       <div class="age-badge">
         <span>🎂</span>
         <span>Turning 19 Today!</span>
@@ -1030,10 +1141,37 @@
   </div>
 </div>
 
-<!-- Music Toggle -->
-<button class="music-toggle" id="musicToggle" onclick="toggleMusic()" title="Toggle Birthday Music">
-  🎵
-</button>
+<!-- Music Panel -->
+<div class="music-panel" id="musicPanel">
+  <div class="music-songs" id="musicSongs">
+    <button class="music-song-btn" onclick="selectSong(0)">
+      <span class="song-icon">🎵</span>
+      <span>Happy Birthday</span>
+    </button>
+    <button class="music-song-btn" onclick="selectSong(1)">
+      <span class="song-icon">🎶</span>
+      <span>For He's a Jolly Good Fellow</span>
+    </button>
+    <button class="music-song-btn" onclick="selectSong(2)">
+      <span class="song-icon">🎸</span>
+      <span>Sunflower Melody</span>
+    </button>
+    <button class="music-song-btn" onclick="selectSong(3)">
+      <span class="song-icon">🎹</span>
+      <span>Lullaby of Wishes</span>
+    </button>
+  </div>
+  <button class="music-toggle-btn" id="musicToggle" onclick="toggleMusic()" title="Choose a song!">
+    🎵
+    <div class="music-visualizer">
+      <div class="viz-bar"></div>
+      <div class="viz-bar"></div>
+      <div class="viz-bar"></div>
+      <div class="viz-bar"></div>
+      <div class="viz-bar"></div>
+    </div>
+  </button>
+</div>
 
 <script>
   // ===== WISH MESSAGES =====
@@ -1362,59 +1500,306 @@
     setTimeout(() => toast.classList.remove('show'), 3500);
   }
 
-  // ===== MUSIC TOGGLE =====
+  // ===== MUSIC ENGINE =====
   let musicPlaying = false;
-  let audioContext = null;
+  let audioCtx = null;
+  let masterGain = null;
+  let currentSong = 0;
+  let songTimeout = null;
+  let panelOpen = false;
+  let activeOscillators = [];
 
-  function toggleMusic() {
-    const btn = document.getElementById('musicToggle');
+  const songs = [
+    // 0: Happy Birthday — full arrangement with harmony
+    {
+      name: 'Happy Birthday',
+      melody: [
+        // "Happy birthday to you"
+        { n: 'G4', d: 0.25 }, { n: 'G4', d: 0.15 }, { n: 'A4', d: 0.45 },
+        { n: 'G4', d: 0.45 }, { n: 'C5', d: 0.45 }, { n: 'B4', d: 0.8 },
+        // "Happy birthday to you"
+        { n: 'G4', d: 0.25 }, { n: 'G4', d: 0.15 }, { n: 'A4', d: 0.45 },
+        { n: 'G4', d: 0.45 }, { n: 'D5', d: 0.45 }, { n: 'C5', d: 0.8 },
+        // "Happy birthday dear Mahika"
+        { n: 'G4', d: 0.25 }, { n: 'G4', d: 0.15 }, { n: 'G5', d: 0.6 },
+        { n: 'E5', d: 0.45 }, { n: 'C5', d: 0.35 }, { n: 'B4', d: 0.35 },
+        { n: 'A4', d: 0.5 },
+        // "Happy birthday to you"
+        { n: 'F5', d: 0.25 }, { n: 'F5', d: 0.15 }, { n: 'E5', d: 0.45 },
+        { n: 'C5', d: 0.45 }, { n: 'D5', d: 0.45 }, { n: 'C5', d: 1.0 },
+      ],
+      chords: [
+        { n: 'C4', d: 1.5 }, { n: 'E4', d: 1.5 },
+        { n: 'C4', d: 1.5 }, { n: 'E4', d: 1.5 },
+        { n: 'C4', d: 1.5 }, { n: 'F4', d: 1.5 },
+        { n: 'D4', d: 1.5 }, { n: 'G3', d: 1.5 },
+        { n: 'C4', d: 1.5 }, { n: 'E4', d: 1.5 },
+        { n: 'C4', d: 1.5 }, { n: 'E4', d: 1.5 },
+        { n: 'C4', d: 1.5 }, { n: 'F4', d: 1.5 },
+        { n: 'D4', d: 1.5 }, { n: 'G3', d: 1.5 },
+        { n: 'F3', d: 2.0 }, { n: 'A3', d: 2.0 },
+        { n: 'C4', d: 2.0 }, { n: 'E4', d: 2.0 },
+        { n: 'F3', d: 2.0 }, { n: 'A3', d: 2.0 },
+        { n: 'G3', d: 2.0 }, { n: 'B3', d: 2.0 },
+        { n: 'C4', d: 2.5 }, { n: 'E4', d: 2.5 },
+        { n: 'G3', d: 2.5 }, { n: 'C4', d: 2.5 },
+      ],
+      waveform: 'triangle',
+      chordWave: 'sine',
+      melodyVol: 0.18,
+      chordVol: 0.07,
+      tempo: 1.0,
+    },
+    // 1: For He's a Jolly Good Fellow
+    {
+      name: "For He's a Jolly Good Fellow",
+      melody: [
+        { n: 'C5', d: 0.35 }, { n: 'D5', d: 0.2 }, { n: 'E5', d: 0.4 },
+        { n: 'C5', d: 0.35 }, { n: 'E5', d: 0.35 }, { n: 'D5', d: 0.35 },
+        { n: 'G5', d: 0.7 },
+        { n: 'C5', d: 0.35 }, { n: 'D5', d: 0.2 }, { n: 'E5', d: 0.4 },
+        { n: 'C5', d: 0.35 }, { n: 'E5', d: 0.25 }, { n: 'D5', d: 0.25 },
+        { n: 'E5', d: 0.25 }, { n: 'F5', d: 0.25 }, { n: 'G5', d: 0.8 },
+        { n: 'A5', d: 0.35 }, { n: 'G5', d: 0.35 }, { n: 'F5', d: 0.35 },
+        { n: 'E5', d: 0.35 }, { n: 'D5', d: 0.35 }, { n: 'C5', d: 0.35 },
+        { n: 'E5', d: 0.35 }, { n: 'F5', d: 0.35 }, { n: 'G5', d: 0.7 },
+        { n: 'C5', d: 0.35 }, { n: 'D5', d: 0.2 }, { n: 'E5', d: 0.4 },
+        { n: 'C5', d: 0.35 }, { n: 'E5', d: 0.25 }, { n: 'D5', d: 0.25 },
+        { n: 'E5', d: 0.25 }, { n: 'D5', d: 0.25 }, { n: 'C5', d: 1.0 },
+      ],
+      chords: [
+        { n: 'C4', d: 1.5 }, { n: 'E4', d: 1.5 }, { n: 'G4', d: 1.5 },
+        { n: 'F3', d: 1.5 }, { n: 'A3', d: 1.5 }, { n: 'C4', d: 1.5 },
+        { n: 'C4', d: 1.5 }, { n: 'E4', d: 1.5 }, { n: 'G4', d: 1.5 },
+        { n: 'G3', d: 1.5 }, { n: 'B3', d: 1.5 }, { n: 'D4', d: 1.5 },
+        { n: 'C4', d: 1.5 }, { n: 'E4', d: 1.5 }, { n: 'G4', d: 1.5 },
+        { n: 'F3', d: 1.5 }, { n: 'A3', d: 1.5 }, { n: 'C4', d: 1.5 },
+        { n: 'G3', d: 1.5 }, { n: 'B3', d: 1.5 }, { n: 'D4', d: 1.5 },
+        { n: 'C4', d: 1.5 }, { n: 'E4', d: 1.5 }, { n: 'G4', d: 1.5 },
+      ],
+      waveform: 'triangle',
+      chordWave: 'sine',
+      melodyVol: 0.17,
+      chordVol: 0.06,
+      tempo: 1.05,
+    },
+    // 2: Sunflower Melody — warm, uplifting original tune
+    {
+      name: 'Sunflower Melody',
+      melody: [
+        { n: 'E4', d: 0.4 }, { n: 'G4', d: 0.4 }, { n: 'A4', d: 0.6 },
+        { n: 'G4', d: 0.3 }, { n: 'E4', d: 0.3 }, { n: 'D4', d: 0.5 },
+        { n: 'E4', d: 0.4 }, { n: 'G4', d: 0.4 }, { n: 'A4', d: 0.4 },
+        { n: 'B4', d: 0.6 }, { n: 'A4', d: 0.4 }, { n: 'G4', d: 0.8 },
+        { n: 'C5', d: 0.4 }, { n: 'B4', d: 0.3 }, { n: 'A4', d: 0.3 },
+        { n: 'G4', d: 0.4 }, { n: 'E4', d: 0.4 }, { n: 'G4', d: 0.6 },
+        { n: 'A4', d: 0.3 }, { n: 'G4', d: 0.3 }, { n: 'E4', d: 0.3 },
+        { n: 'D4', d: 0.3 }, { n: 'E4', d: 0.3 }, { n: 'G4', d: 0.3 },
+        { n: 'E4', d: 0.4 }, { n: 'G4', d: 0.4 }, { n: 'A4', d: 0.4 },
+        { n: 'B4', d: 0.4 }, { n: 'A4', d: 0.4 }, { n: 'G4', d: 0.4 },
+        { n: 'E4', d: 0.4 }, { n: 'D4', d: 0.4 }, { n: 'E4', d: 1.0 },
+      ],
+      chords: [
+        { n: 'C3', d: 2.0 }, { n: 'E3', d: 2.0 }, { n: 'G3', d: 2.0 },
+        { n: 'A2', d: 2.0 }, { n: 'C3', d: 2.0 }, { n: 'E3', d: 2.0 },
+        { n: 'F3', d: 2.0 }, { n: 'A3', d: 2.0 }, { n: 'C4', d: 2.0 },
+        { n: 'G3', d: 2.0 }, { n: 'B3', d: 2.0 }, { n: 'D4', d: 2.0 },
+        { n: 'C3', d: 2.0 }, { n: 'E3', d: 2.0 }, { n: 'G3', d: 2.0 },
+        { n: 'A2', d: 2.0 }, { n: 'C3', d: 2.0 }, { n: 'E3', d: 2.0 },
+        { n: 'D3', d: 2.0 }, { n: 'F3', d: 2.0 }, { n: 'A3', d: 2.0 },
+        { n: 'C3', d: 2.0 }, { n: 'E3', d: 2.0 }, { n: 'G3', d: 2.0 },
+      ],
+      waveform: 'sine',
+      chordWave: 'sine',
+      melodyVol: 0.16,
+      chordVol: 0.06,
+      tempo: 0.9,
+    },
+    // 3: Lullaby of Wishes — gentle, dreamy
+    {
+      name: 'Lullaby of Wishes',
+      melody: [
+        { n: 'C5', d: 0.6 }, { n: 'B4', d: 0.3 }, { n: 'A4', d: 0.5 },
+        { n: 'G4', d: 0.6 }, { n: 'A4', d: 0.3 }, { n: 'G4', d: 0.3 },
+        { n: 'F4', d: 0.5 }, { n: 'E4', d: 0.6 },
+        { n: 'G4', d: 0.6 }, { n: 'A4', d: 0.3 }, { n: 'B4', d: 0.5 },
+        { n: 'C5', d: 0.6 }, { n: 'D5', d: 0.3 }, { n: 'C5', d: 0.3 },
+        { n: 'B4', d: 0.5 }, { n: 'A4', d: 0.6 },
+        { n: 'E5', d: 0.6 }, { n: 'D5', d: 0.4 }, { n: 'C5', d: 0.5 },
+        { n: 'B4', d: 0.4 }, { n: 'A4', d: 0.4 }, { n: 'G4', d: 0.5 },
+        { n: 'A4', d: 0.4 }, { n: 'G4', d: 0.4 }, { n: 'F4', d: 0.4 },
+        { n: 'E4', d: 0.8 },
+        { n: 'C5', d: 0.6 }, { n: 'B4', d: 0.3 }, { n: 'A4', d: 0.5 },
+        { n: 'G4', d: 0.4 }, { n: 'A4', d: 0.4 }, { n: 'G4', d: 0.4 },
+        { n: 'F4', d: 0.4 }, { n: 'E4', d: 0.4 }, { n: 'D4', d: 0.4 },
+        { n: 'C4', d: 1.2 },
+      ],
+      chords: [
+        { n: 'C3', d: 2.5 }, { n: 'E3', d: 2.5 }, { n: 'G3', d: 2.5 },
+        { n: 'F3', d: 2.5 }, { n: 'A3', d: 2.5 }, { n: 'C4', d: 2.5 },
+        { n: 'G3', d: 2.5 }, { n: 'B3', d: 2.5 }, { n: 'D4', d: 2.5 },
+        { n: 'A3', d: 2.5 }, { n: 'C4', d: 2.5 }, { n: 'E4', d: 2.5 },
+        { n: 'C3', d: 2.5 }, { n: 'E3', d: 2.5 }, { n: 'G3', d: 2.5 },
+        { n: 'F3', d: 2.5 }, { n: 'A3', d: 2.5 }, { n: 'C4', d: 2.5 },
+        { n: 'G3', d: 2.5 }, { n: 'B3', d: 2.5 }, { n: 'D4', d: 2.5 },
+        { n: 'C3', d: 2.5 }, { n: 'E3', d: 2.5 }, { n: 'G3', d: 2.5 },
+      ],
+      waveform: 'sine',
+      chordWave: 'sine',
+      melodyVol: 0.14,
+      chordVol: 0.05,
+      tempo: 0.75,
+    },
+  ];
 
-    if (!audioContext) {
-      audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const noteFreq = {
+    'C3': 130.81, 'D3': 146.83, 'E3': 164.81, 'F3': 174.61,
+    'G3': 196.00, 'A3': 220.00, 'B3': 246.94,
+    'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23,
+    'G4': 392.00, 'A4': 440.00, 'B4': 493.88,
+    'C5': 523.25, 'D5': 587.33, 'E5': 659.25, 'F5': 698.46,
+    'G5': 783.99, 'A5': 880.00,
+  };
+
+  function ensureAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
-
-    if (musicPlaying) {
-      audioContext.suspend();
-      btn.textContent = '🔇';
-      musicPlaying = false;
-      showToast('🔇 Music paused');
-    } else {
-      audioContext.resume();
-      btn.textContent = '🎵';
-      musicPlaying = true;
-      playBirthdayMelody();
-      showToast('🎵 Playing birthday vibes!');
+    if (!masterGain) {
+      masterGain = audioCtx.createGain();
+      masterGain.connect(audioCtx.destination);
     }
   }
 
-  function playBirthdayMelody() {
-    if (!audioContext || !musicPlaying) return;
+  function killAllOscillators() {
+    activeOscillators.forEach(o => {
+      try { o.gain.cancelScheduledValues(audioCtx.currentTime); } catch(e) {}
+      try { o.gain.setValueAtTime(0, audioCtx.currentTime); } catch(e) {}
+      try { o.osc.stop(audioCtx.currentTime + 0.01); } catch(e) {}
+    });
+    activeOscillators = [];
+  }
 
-    const notes = [
-      { freq: 262, dur: 0.3 }, { freq: 294, dur: 0.3 }, { freq: 330, dur: 0.3 },
-      { freq: 262, dur: 0.3 }, { freq: 330, dur: 0.3 }, { freq: 349, dur: 0.3 },
-      { freq: 392, dur: 0.6 }, { freq: 330, dur: 0.3 }, { freq: 349, dur: 0.3 },
-      { freq: 392, dur: 0.3 }, { freq: 440, dur: 0.6 },
-    ];
+  function toggleMusic() {
+    ensureAudio();
 
-    let time = audioContext.currentTime;
-    notes.forEach(note => {
-      const osc = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = note.freq;
-      gain.gain.setValueAtTime(0.15, time);
-      gain.gain.exponentialRampToValueAtTime(0.01, time + note.dur);
-      osc.connect(gain);
-      gain.connect(audioContext.destination);
-      osc.start(time);
-      osc.stop(time + note.dur);
-      time += note.dur;
+    panelOpen = !panelOpen;
+    document.getElementById('musicSongs').classList.toggle('open', panelOpen);
+
+    if (!musicPlaying) {
+      audioCtx.resume();
+      musicPlaying = true;
+      document.getElementById('musicToggle').classList.add('playing');
+      masterGain.gain.setValueAtTime(1, audioCtx.currentTime);
+      playSong();
+      showToast('🎵 Now playing: ' + songs[currentSong].name);
+    } else {
+      stopMusic();
+    }
+  }
+
+  function selectSong(index) {
+    ensureAudio();
+    currentSong = index;
+
+    document.querySelectorAll('.music-song-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i === index);
     });
 
+    // Kill every note that's still sounding
+    if (songTimeout) clearTimeout(songTimeout);
+    killAllOscillators();
+
+    // Ensure volume is back up
+    audioCtx.resume();
+    masterGain.gain.setValueAtTime(0, audioCtx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.05);
+
+    musicPlaying = true;
+    document.getElementById('musicToggle').classList.add('playing');
+    playSong();
+    showToast('🎵 Now playing: ' + songs[index].name);
+
     setTimeout(() => {
-      if (musicPlaying) playBirthdayMelody();
-    }, 5000);
+      panelOpen = false;
+      document.getElementById('musicSongs').classList.remove('open');
+    }, 300);
+  }
+
+  function stopMusic(hidePanel = true) {
+    if (songTimeout) clearTimeout(songTimeout);
+    killAllOscillators();
+
+    // Fade out quickly then cut
+    if (masterGain && audioCtx) {
+      masterGain.gain.setValueAtTime(masterGain.gain.value, audioCtx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.15);
+    }
+
+    musicPlaying = false;
+    document.getElementById('musicToggle').classList.remove('playing');
+    if (hidePanel) {
+      panelOpen = false;
+      document.getElementById('musicSongs').classList.remove('open');
+    }
+  }
+
+  function playSong() {
+    if (!audioCtx || !musicPlaying) return;
+
+    const song = songs[currentSong];
+    let time = audioCtx.currentTime + 0.05;
+
+    // Melody
+    song.melody.forEach(note => {
+      if (!noteFreq[note.n]) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = song.waveform;
+      osc.frequency.value = noteFreq[note.n];
+
+      const dur = note.d * song.tempo;
+      gain.gain.setValueAtTime(0, time);
+      gain.gain.linearRampToValueAtTime(song.melodyVol, time + 0.02);
+      gain.gain.setValueAtTime(song.melodyVol, time + dur * 0.7);
+      gain.gain.exponentialRampToValueAtTime(0.001, time + dur);
+
+      osc.connect(gain);
+      gain.connect(masterGain);
+      osc.start(time);
+      osc.stop(time + dur + 0.01);
+      activeOscillators.push({ osc, gain });
+      time += dur;
+    });
+
+    // Chords
+    let chordTime = audioCtx.currentTime + 0.05;
+    song.chords.forEach(note => {
+      if (!noteFreq[note.n]) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = song.chordWave;
+      osc.frequency.value = noteFreq[note.n];
+
+      const dur = note.d * song.tempo;
+      gain.gain.setValueAtTime(0, chordTime);
+      gain.gain.linearRampToValueAtTime(song.chordVol, chordTime + 0.1);
+      gain.gain.setValueAtTime(song.chordVol, chordTime + dur * 0.8);
+      gain.gain.exponentialRampToValueAtTime(0.001, chordTime + dur);
+
+      osc.connect(gain);
+      gain.connect(masterGain);
+      osc.start(chordTime);
+      osc.stop(chordTime + dur + 0.01);
+      activeOscillators.push({ osc, gain });
+      chordTime += dur;
+    });
+
+    // Loop
+    const totalMelodyTime = song.melody.reduce((sum, n) => sum + n.d * song.tempo, 0);
+    songTimeout = setTimeout(() => {
+      if (musicPlaying) playSong();
+    }, (totalMelodyTime + 0.5) * 1000);
   }
 
   // ===== INIT =====
